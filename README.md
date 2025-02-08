@@ -171,7 +171,7 @@ When using the `BACK_COLOR` option, the color you provided will be whitened when
 <!doctype html>
 <html>
   <body>
-    <canvas style="width: 100vw; height: 100vh;"></canvas>
+    <div id="canvas-container" style="width: 100vw; height: 100vh;"></div>
     <script type="importmap">
       {
         "imports": {
@@ -180,14 +180,17 @@ When using the `BACK_COLOR` option, the color you provided will be whitened when
       }
     </script>
     <script type="module">
-      import webGLFluidEnhanced from 'webgl-fluid-simulation';
+      import WebGLFluidEnhanced from 'webgl-fluid-enhanced';
 
-      webGLFluidEnhanced.simulation(document.querySelector('canvas'), {
-        COLOR_PALETTE: ['#cc211b', '#f1c593', '#e87e54', '#f193a7', '#ec6fa9'],
-        HOVER: false,
-        SPLAT_RADIUS: 0.1,
-        VELOCITY_DISSIPATION: 0.99,
-        BLOOM: false,
+      const container = document.getElementById('canvas-container');
+      const simulation = new WebGLFluidEnhanced(container);
+      simulation.setConfig({
+          //paste edit configuration code 
+      });
+      simulation.start();
+
+      window.addEventListener('beforeunload', () => {
+      	simulation.stop();
       });
     </script>
   </body>
